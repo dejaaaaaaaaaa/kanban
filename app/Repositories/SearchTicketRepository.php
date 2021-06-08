@@ -25,13 +25,13 @@ class SearchTicketRepository  implements SearchTicketRepositoryInterface
         $this->model = $model;
     }
 
-    public function search(string $phrase): Collection
+    public function search(string $search): Collection
     {
         return $this->model
-            ->where(DB::raw('lower(title)'), 'like', '%' . strtolower($phrase) . '%')
-            ->orWhere(DB::raw('lower(description)'), 'like', '%' . strtolower($phrase) . '%')
-            ->ofStatusSearch($phrase)
-            ->ofPrioritySearch($phrase)
+            ->where(DB::raw('lower(title)'), 'like', '%' . strtolower($search) . '%')
+            ->orWhere(DB::raw('lower(description)'), 'like', '%' . strtolower($search) . '%')
+            ->ofStatusSearch($search)
+            ->ofPrioritySearch($search)
             ->get();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repositories\Interfaces;
 
 use App\Models\Status;
+
 use Illuminate\Database\Eloquent\Collection;
 
 interface StatusRepositoryInterface

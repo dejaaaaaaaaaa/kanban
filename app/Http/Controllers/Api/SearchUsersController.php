@@ -20,6 +20,6 @@ class SearchUsersController extends Controller
 
     public function search(Request $request) :JsonResponse
     {
-        return response()->json(UserResource::collection($this->searchUserService->search($request->phrase)));
+        return response()->json(UserResource::collection($this->searchUserService->search($request->search)));
     }
 }

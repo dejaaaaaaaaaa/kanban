@@ -25,11 +25,11 @@ class SearchUserRepository  implements SearchUserRepositoryInterface
         $this->model = $model;
     }
 
-    public function search(string $phrase): Collection
+    public function search(string $search): Collection
     {
         return $this->model
-            ->where(DB::raw('lower(name)'), 'like', '%' . strtolower($phrase) . '%')
-            ->orWhere(DB::raw('lower(email)'), 'like', '%' . strtolower($phrase) . '%')
+            ->where(DB::raw('lower(name)'), 'like', '%' . strtolower($search) . '%')
+            ->orWhere(DB::raw('lower(email)'), 'like', '%' . strtolower($search) . '%')
             ->get();
     }
 }

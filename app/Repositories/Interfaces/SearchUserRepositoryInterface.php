@@ -2,10 +2,9 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Models\Ticket;
 use Illuminate\Database\Eloquent\Collection;
 
 interface SearchUserRepositoryInterface
 {
-    public function search(string $phrase) :Collection;
+    public function search(string $search) :Collection;
 }

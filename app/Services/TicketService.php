@@ -8,6 +8,7 @@ use App\Models\Ticket;
 use App\Repositories\Interfaces\PriorityRepositoryInterface;
 use App\Repositories\Interfaces\StatusRepositoryInterface;
 use App\Repositories\Interfaces\TicketRepositoryInterface;
+
 use Illuminate\Database\Eloquent\Collection;
 
 
@@ -15,7 +16,7 @@ class TicketService
 {
     /**
     *
-    * @var TicketRepository $ticketRepository
+    * @var TicketRepositoryInterface $ticketRepository
     */
     private $ticketRepository;
 

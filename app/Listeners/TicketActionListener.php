@@ -27,11 +27,10 @@ class TicketActionListener
      */
     public function handle(TicketActionEvent $event)
     {
-        $data = [
-            'action' => $event->action,
+        $history = new TicketHistory([
+            'action'    => $event->action            ,
             'user_id'   => $event->ticket->updated_by,
-        ];
-        $history = new TicketHistory($data);
+        ]);
         $event->ticket->ticketHistories()->save($history);
     }
 }

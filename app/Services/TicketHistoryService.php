@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\TicketHistoryRepositoryInterface;
+
 use Illuminate\Database\Eloquent\Collection;
 
 

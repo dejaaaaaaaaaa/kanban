@@ -16,7 +16,7 @@ class TicketHistoryRepository  implements TicketHistoryRepositoryInterface
     private $model;
 
     /**
-     * TicketRepository constructor.
+     * TicketHistoryRepository constructor.
      * @param TicketHistory $model
      */
     public function __construct(TicketHistory $model)

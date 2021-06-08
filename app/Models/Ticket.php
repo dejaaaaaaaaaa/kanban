@@ -99,17 +99,17 @@ class Ticket extends Model
         return $this->hasMany(TicketHistory::class);
     }
 
-    public function scopeOfStatusSearch(Builder $query, string $phrase)
+    public function scopeOfStatusSearch(Builder $query, string $search)
     {
-        $query->orWhereHas('status', function ($q) use ($phrase){
-            $q->where(DB::raw('lower(status)'), 'like', '%' . strtolower($phrase) . '%');
+        $query->orWhereHas('status', function ($q) use ($search){
+            $q->where(DB::raw('lower(status)'), 'like', '%' . strtolower($search) . '%');
         });
     }
 
-    public function scopeOfPrioritySearch(Builder $query, string $phrase)
+    public function scopeOfPrioritySearch(Builder $query, string $search)
     {
-        $query->orWhereHas('priority', function ($q) use ($phrase){
-            $q->where(DB::raw('lower(priority)'), 'like', '%' . strtolower($phrase) . '%');
+        $query->orWhereHas('priority', function ($q) use ($search){
+            $q->where(DB::raw('lower(priority)'), 'like', '%' . strtolower($search) . '%');
         });
     }
 }

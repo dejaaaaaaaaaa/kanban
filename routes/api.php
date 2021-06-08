@@ -21,8 +21,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('tickets/status/{status}', 'App\Http\Controllers\Api\TicketsController@ticketsPerStatus');
     Route::get('tickets/per-status/{status}', 'App\Http\Controllers\Api\TicketsController@ticketsCountPerStatus');
 
-    Route::post('users/search', 'App\Http\Controllers\Api\SearchUsersController@search');
-    Route::post('tickets/search', 'App\Http\Controllers\Api\SearchTicketsController@search');
+    Route::get('users/search', 'App\Http\Controllers\Api\SearchUsersController@search');
+    Route::get('tickets/search', 'App\Http\Controllers\Api\SearchTicketsController@search');
 
     Route::get('tickets/{ticket}/ticket-history', 'App\Http\Controllers\Api\TicketHistoryController@history');
 

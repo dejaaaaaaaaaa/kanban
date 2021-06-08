@@ -20,6 +20,6 @@ class SearchTicketsController extends Controller
 
     public function search(Request $request) :JsonResponse
     {
-        return response()->json(TicketResource::collection($this->searchTicketService->search($request->phrase)));
+        return response()->json(TicketResource::collection($this->searchTicketService->search($request->search)));
     }
 }
