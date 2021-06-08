@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Entities;
 
-
 use App\Models\Priority;
 use App\Models\Status;
 use App\Models\Ticket;
