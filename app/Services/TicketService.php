@@ -83,14 +83,13 @@ class TicketService
     protected function setDefaults(array $data) :array
     {
         if(!isset($data['status_id'])){
-            $data['status_id'] = $this->statusRepository->first();
+            $data['status_id'] = $this->statusRepository->first()->id;
         }
 
         if(!isset($data['priority_id'])) {
-            $data['priority_id'] = $this->priorityRepository->first();
+            $data['priority_id'] = $this->priorityRepository->first()->id;
         }
         $data['user_id'] = auth()->id();
-
         return $data;
     }
 
