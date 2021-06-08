@@ -6,6 +6,7 @@ use App\Models\Ticket;
 use App\Repositories\Interfaces\TicketRepositoryInterface;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TicketRepository  implements TicketRepositoryInterface
 {
@@ -37,16 +38,24 @@ class TicketRepository  implements TicketRepositoryInterface
         return $this->model->create($data);
     }
 
-    public function findById(int $id) :Ticket
+    public function findById(int $id) :?Ticket
     {
-        return $this->model->findOrFail($id);
+        try {
+            return $this->model->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return null;
+        }
     }
 
-    public function update(int $id, array $data)  :Ticket
+    public function update(int $id, array $data)  :?Ticket
     {
-        $ticket = $this->findById($id);
-        $ticket->update($data);
-        return $ticket->refresh();
+        try {
+            $ticket = $this->findById($id);
+            $ticket->update($data);
+            return $ticket->refresh();
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 
     public function delete(int $id) :void

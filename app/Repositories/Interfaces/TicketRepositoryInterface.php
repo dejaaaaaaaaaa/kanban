@@ -12,9 +12,9 @@ interface TicketRepositoryInterface
 
     public function store(array $data) :Ticket;
 
-    public function findById(int $id) :Ticket;
+    public function findById(int $id) :?Ticket;
 
-    public function update(int $id, array $data) :Ticket;
+    public function update(int $id, array $data) :?Ticket;
 
     public function delete(int $id) :void;
 

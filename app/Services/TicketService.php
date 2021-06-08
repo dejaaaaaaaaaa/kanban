@@ -49,7 +49,7 @@ class TicketService
         return $this->ticketRepository->getAll();
     }
 
-    public function findById(int $id) :Ticket
+    public function findById(int $id) :?Ticket
     {
         return $this->ticketRepository->findById($id);
     }
@@ -62,10 +62,12 @@ class TicketService
         return $ticket;
     }
 
-    public function update(int $id, array $data) :Ticket
+    public function update(int $id, array $data) :?Ticket
     {
         $ticket = $this->ticketRepository->update($id, $data);
-        TicketActionEvent::dispatch($ticket, TicketAction::getValue('Updated'));
+        if($ticket){
+            TicketActionEvent::dispatch($ticket, TicketAction::getValue('Updated'));
+        }
 
         return $ticket;
     }

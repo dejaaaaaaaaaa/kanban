@@ -9,6 +9,7 @@ use App\Http\Requests\TicketUpdateRequest;
 use App\Services\TicketService;
 
 use Illuminate\Http\JsonResponse;
+use Psy\Util\Json;
 
 class TicketsController extends Controller
 {
@@ -31,15 +32,23 @@ class TicketsController extends Controller
 
     }
 
-    public function show($id)
+    public function show(int $id) :JsonResponse
     {
-        return response()->json(TicketResource::make($this->ticketService->findById($id)));
+        $ticket = $this->ticketService->findById($id);
+        if($ticket){
+            return response()->json(TicketResource::make($ticket));
+        }
+        return response()->json('Ticket not found!');
     }
 
     public function update(TicketUpdateRequest $request, $id) :JsonResponse
     {
         $data = $request->validated();
-        return response()->json(TicketResource::make($this->ticketService->update($id, $data)));
+        $ticket = $this->ticketService->update($id, $data);
+        if($ticket){
+            return response()->json(TicketResource::make($ticket));
+        }
+        return response()->json('Ticket not updated!');
     }
 
     public function destroy($user) :JsonResponse

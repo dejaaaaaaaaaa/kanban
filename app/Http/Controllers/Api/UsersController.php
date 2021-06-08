@@ -32,15 +32,23 @@ class UsersController extends Controller
 
     }
 
-    public function show($id)
+    public function show($id) :JsonResponse
     {
-        return response()->json(UserResource::make($this->userService->findById($id)));
+        $user = $this->userService->findById($id);
+        if($user){
+            return response()->json(UserResource::make($user));
+        }
+        return response()->json('User not found!');
     }
 
-    public function update(UserUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, $id) :JsonResponse
     {
         $data = $request->validated();
-        return response()->json(UserResource::make($this->userService->update($id, $data)));
+        $user = $this->userService->update($id, $data);
+        if($user){
+            return response()->json(UserResource::make($user));
+        }
+        return response()->json('User not updated!');
     }
 
     public function destroy($user)

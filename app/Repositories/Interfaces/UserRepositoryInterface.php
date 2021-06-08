@@ -11,9 +11,9 @@ interface UserRepositoryInterface
 
     public function store(array $data) :User;
 
-    public function findById(int $id) :User;
+    public function findById(int $id) :?User;
 
-    public function update(int $id, array $data) :User;
+    public function update(int $id, array $data) :?User;
 
     public function delete(int $id) :void;
 }

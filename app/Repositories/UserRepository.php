@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository  implements UserRepositoryInterface
 {
@@ -34,16 +35,24 @@ class UserRepository  implements UserRepositoryInterface
         return $this->model->create($data);
     }
 
-    public function findById(int $id) :User
+    public function findById(int $id) :?User
     {
-        return $this->model->findOrFail($id);
+        try {
+            return $this->model->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return null;
+        }
     }
 
-    public function update(int $id, array $data)  :User
+    public function update(int $id, array $data)  :?User
     {
-        $user = $this->findById($id);
-        $user->update($data);
-        return $user->refresh();
+        try {
+            $user = $this->findById($id);
+            $user->update($data);
+            return $user->refresh();
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 
     public function delete(int $id) :void

@@ -30,7 +30,7 @@ class UserService
         return $this->userRepository->getAll();
     }
 
-    public function findById(int $id) :User
+    public function findById(int $id) :?User
     {
         return $this->userRepository->findById($id);
     }
@@ -42,7 +42,7 @@ class UserService
         return $this->userRepository->store($data);
     }
 
-    public function update(int $id, array $data) :User
+    public function update(int $id, array $data) :?User
     {
         return $this->userRepository->update($id, $data);
     }
