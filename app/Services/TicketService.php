@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Enums\TicketAction;
+use App\Events\TicketActionEvent;
 use App\Models\Ticket;
 use App\Repositories\Interfaces\PriorityRepositoryInterface;
 use App\Repositories\Interfaces\StatusRepositoryInterface;
@@ -53,17 +55,26 @@ class TicketService
 
     public function store(array $data) :Ticket
     {
-        return $this->ticketRepository->store($this->setDefaults($data));
+        $ticket = $this->ticketRepository->store($this->setDefaults($data));
+        TicketActionEvent::dispatch($ticket, TicketAction::getValue('Created'));
+
+        return $ticket;
     }
 
     public function update(int $id, array $data) :Ticket
     {
-        return $this->ticketRepository->update($id, $data);
+        $ticket = $this->ticketRepository->update($id, $data);
+        TicketActionEvent::dispatch($ticket, TicketAction::getValue('Updated'));
+
+        return $ticket;
     }
 
     public function delete(int $id) :void
     {
+        $ticket = $this->ticketRepository->findById($id);
         $this->ticketRepository->delete($id);
+
+        TicketActionEvent::dispatch($ticket, TicketAction::getValue('Deleted'));
     }
 
     protected function setDefaults(array $data) :array

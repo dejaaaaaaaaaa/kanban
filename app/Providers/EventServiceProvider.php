@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\TicketActionEvent;
+use App\Listeners\TicketActionListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,7 +19,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        TicketActionEvent::class => [
+            TicketActionListener::class,
+        ]
     ];
+
 
     /**
      * Register any events for your application.
@@ -27,6 +32,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
     }
 }

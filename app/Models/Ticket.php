@@ -89,6 +89,16 @@ class Ticket extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
+    /**
+     * Get ticket history
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ticketHistories()
+    {
+        return $this->hasMany(TicketHistory::class);
+    }
+
     public function scopeOfStatusSearch(Builder $query, string $phrase)
     {
         $query->orWhereHas('status', function ($q) use ($phrase){

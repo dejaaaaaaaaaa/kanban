@@ -6,11 +6,13 @@ use App\Repositories\Interfaces\PriorityRepositoryInterface;
 use App\Repositories\Interfaces\SearchTicketRepositoryInterface;
 use App\Repositories\Interfaces\SearchUserRepositoryInterface;
 use App\Repositories\Interfaces\StatusRepositoryInterface;
+use App\Repositories\Interfaces\TicketHistoryRepositoryInterface;
 use App\Repositories\Interfaces\TicketRepositoryInterface;
 use App\Repositories\PriorityRepository;
 use App\Repositories\SearchTicketRepository;
 use App\Repositories\SearchUserRepository;
 use App\Repositories\StatusRepository;
+use App\Repositories\TicketHistoryRepository;
 use App\Repositories\TicketRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\Interfaces\UserRepositoryInterface;
@@ -31,6 +33,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PriorityRepositoryInterface::class, PriorityRepository::class);
         $this->app->bind(SearchTicketRepositoryInterface::class, SearchTicketRepository::class);
         $this->app->bind(SearchUserRepositoryInterface::class, SearchUserRepository::class);
+        $this->app->bind(TicketHistoryRepositoryInterface::class, TicketHistoryRepository::class);
     }
 
     /**
